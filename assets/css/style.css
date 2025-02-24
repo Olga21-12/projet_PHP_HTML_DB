@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html, body{
+    width: 100%;
+    min-height: 100vh;
+}
+
+body{
+    font-family: "Alegreya", serif;
+    background-image: url("https://png.pngtree.com/background/20230525/original/pngtree-photograph-of-a-big-city-in-sepia-tones-picture-image_2735709.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* header */
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* navigation  */
+  
+.nav_bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em 2em;
+    background: burlywood;
+    box-shadow: 18px -1px 15px rgb(222, 133, 70);
+}
+  
+.nav_bar .menu-list,
+.nav_bar .menu-list-login {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+  
+.nav_bar .menu-list li,
+.nav_bar .menu-list-login li {
+    margin: 0 1em;
+}
+  
+.nav_bar .menu-list li a,
+.nav_bar .menu-list-login li a {
+    text-decoration: none;
+    color:brown;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-size: 1.5em;
+}
+  
+.nav_bar .menu-list li a:hover,
+.nav_bar .menu-list-login li a:hover {
+    color: #f5f5dc;
+    text-decoration: underline;
+    text-shadow: 18px -1px 15px rgb(222, 133, 70);
+}
+  
+.logotip {
+    flex-grow: 1;
+    text-align: center;
+}
+  
+.logotip img {
+    max-width: 150px;
+    height: auto;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* container */
+.container__login,
+.container__profil{
+    width: 60%;
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(255, 235, 205, 0.8); 
+    color:brown;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+input {
+    width: 70%;
+    padding: 10px;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0 20px 0;
+}
+
+button{
+  padding: 10px 15px;
+  font-size: 20px;
+  background-color: brown;
+  color: rgba(255, 235, 205, 0.8);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 5px 0 25px 0;
+}
+button:hover {
+  background-color: rgb(115, 28, 28);
+  font-size: 23px;
+}
+
+.pas_encore a{
+    color: brown;
+}
+
+/* profil */
+.container__profil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.container__profil h1 {
+    margin-bottom: 20px;
+}
+
+.profil__info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 30px; /* Пространство между фото и списком */
+}
+
+.profil__info img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 3px solid brown;
+}
+
+.profil__details {
+    text-align: left;
+}
+
+.profil__details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profil__details li {
+    margin-bottom: 10px;
+}
+
+.about__me {
+    margin-top: 20px;
+    padding: 15px;
+    width: 100%;
+    font-size: 0.7em;
+    text-align: left;
+}
+
+
+/* footer */
+
+footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: burlywood;
+    text-align: center;
+    padding: 10px;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 4rem;
+    box-shadow: 18px -1px 15px rgb(222, 133, 70);
+    margin-top: auto;
+    color:brown;
+}
+
+.nav-footer {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    padding: 2px;
+}
+
+.nav-footer-list{
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-footer-list li {
+    margin-left: 20px;
+}
+
+.nav-footer-list a {
+    text-decoration: none;
+    color: brown;
+    font-size: 20px;    
+}
+
+.nav-footer-list a:hover {
+    color: bisque;
+}
+
+footer span {
+    position: absolute;
+    bottom: 10px;
+    right: 20px; 
+    font-size: small;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+    
+li {
+    list-style-type: none;
+}
+
+.footer-date {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+
