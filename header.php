@@ -7,6 +7,9 @@
     <title>
         
     <?php
+
+$current_page = basename($_SERVER['PHP_SELF']);
+
         if(isset($title)){ 
             echo $title; 
         }else{
@@ -25,16 +28,20 @@
   <div class="nav_bar">
       <ul class="menu-list">
         <li><a href="./index.php">HOME</a></li>
-        <li><a href="./profile.php">MON PROFIL</a></li>
+        <li><a href="./profile.php" class="<?= ($current_page == 'profile.php') ? 'active' : '' ?>">MON PROFIL</a></li>
       </ul>
       
       <div class="logotip">
-        <img src="" alt="logo" title="logo">
+        <img src="./assets/img/logo_ao4.png" alt="logo" title="logo">
       </div>
 
       <ul class="menu-list">
         <li><a href="./register.php">INSCRIPTION</a></li>
-        <li><a href="./login.php">LOGIN</a></li>
+        <?php if (isset($_SESSION['user'])): ?>
+          <li><a href="./logout.php" class="<?= ($current_page == 'logout.php') ? 'active' : '' ?>">LOGOUT</a></li>
+        <?php else: ?>
+          <li><a href="./login.php" class="<?= ($current_page == 'login.php') ? 'active' : '' ?>">LOGIN</a></li>
+        <?php endif; ?>
       </ul>
     </div>
 </div>
