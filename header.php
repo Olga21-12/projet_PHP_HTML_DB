@@ -27,7 +27,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     
   <div class="nav_bar">
       <ul class="menu-list">
-        <li><a href="./index.php">HOME</a></li>
+        <li><a href="./index.php" class="<?= ($current_page == 'index.php') ? 'active' : '' ?>">HOME</a></li>
         <li><a href="./profile.php" class="<?= ($current_page == 'profile.php') ? 'active' : '' ?>">MON PROFIL</a></li>
       </ul>
       
