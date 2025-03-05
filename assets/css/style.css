@@ -68,6 +68,14 @@ body{
     text-decoration: underline;
     text-shadow: 18px -1px 15px rgb(222, 133, 70);
 }
+
+.active {
+    color: #f5f5dc !important;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgb(222, 133, 70);
+    transition: all 0.3s ease-in-out;
+}
   
 .logotip {
     flex-grow: 1;
@@ -75,8 +83,9 @@ body{
 }
   
 .logotip img {
-    max-width: 150px;
+    max-width: 75px;
     height: auto;
+    border-radius: 25%;
 }
 
 .main-content {
@@ -106,6 +115,21 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin: 10px 0 20px 0;
+    text-align: center;
+}
+
+.message-error {
+    background-color: white;
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    border: 2px solid red;
+    border-radius: 10px;
+    width: 50%;
+    margin: 20px auto;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
 }
 
 button{
