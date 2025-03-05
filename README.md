@@ -44,7 +44,6 @@ Ce projet est une application web développée en PHP qui permet aux utilisateur
 ├── 📂 src/               # Code PHP principal  
 │   ├── 📂 config/        # Fichiers de configuration  
 │   │   ├── database.php  # Connexion à la base de données  
-│   │   ├── config.php    # Configuration générale  
 │   ├── 📂 classes/       # Classes en PHP  
 │   │   ├── Utilisateur.php  # Classe Utilisateur  
 │   │   ├── Ville.php        # Classe Ville  
@@ -75,4 +74,4 @@ Ce projet est une application web développée en PHP qui permet aux utilisateur
 - Une fois connecté, `profile.php` affiche les informations et la nationalité  
 
 4️⃣ **Se déconnecter**  
-- Cliquer sur "Déconnexion" pour terminer la session  
+- Cliquer sur "Logout" pour terminer la session  
