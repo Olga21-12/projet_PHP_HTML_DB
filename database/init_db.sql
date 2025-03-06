@@ -48,6 +48,19 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Structure de la table `villes`
 --
 
+-- Insertion villes
+INSERT INTO villes (nom, pays, capitale, nationalite) VALUES
+('Paris', 'France', 1, 'Française'),
+('Londres', 'Royaume-Uni', 1, 'Britannique'),
+('Berlin', 'Allemagne', 1, 'Allemande'),
+('Madrid', 'Espagne', 1, 'Espagnole'),
+('Rome', 'Italie', 1, 'Italienne'),
+('Bruxelles', 'Belgique', 1, 'Belge'),
+('Lisbonne', 'Portugal', 1, 'Portugaise'),
+('Amsterdam', 'Pays-Bas', 1, 'Néerlandaise'),
+('Athènes', 'Grèce', 1, 'Grecque'),
+('Vienne', 'Autriche', 1, 'Autrichienne');
+
 DROP TABLE IF EXISTS `villes`;
 CREATE TABLE IF NOT EXISTS `villes` (
   `id_ville` int NOT NULL AUTO_INCREMENT,
