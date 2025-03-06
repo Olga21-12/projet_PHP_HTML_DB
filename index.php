@@ -2,44 +2,55 @@
 session_start();
 require 'src/config/database.php';
 
-$title = "Inscription";
-$nav = "./register.php";
-
-require "./header.php";
-
-$message = "";
+//  requête pour récupérer les villes
 $query = "SELECT * FROM villes";
 $stmt = $pdo->query($query);
 $villes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$title = "Accueil";
+$nav = "./index.php";
 
-    $nom = htmlspecialchars(trim($_POST['nom']));
-    $prenom = htmlspecialchars(trim($_POST['prenom']));
-    $pseudo = htmlspecialchars(trim($_POST['pseudo']));
-    $password = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
-    $age = (int) $_POST['age'];
-    $ville_id = (int) $_POST['ville_id'];
-
-
-    $checkPseudo = $pdo->prepare("SELECT id FROM utilisateurs WHERE pseudo = ?");
-    $checkPseudo->execute([$pseudo]);
-
-    if ($checkPseudo->rowCount() > 0) {
-        $message = "⚠️ Ce pseudo est déjà utilisé, veuillez en choisir un autre.";
-    } else {
-
-        $stmt = $pdo->prepare("INSERT INTO utilisateurs (nom, prenom, pseudo, mot_de_passe, age, ville_id) 
-                               VALUES (?, ?, ?, ?, ?, ?)");
-        if ($stmt->execute([$nom, $prenom, $pseudo, $password, $age, $ville_id])) {
-            $message = "✅ Inscription réussie ! Vous pouvez maintenant vous connecter.";
-        } else {
-            $message = "❌ Erreur lors de l'inscription. Veuillez réessayer.";
-        }
-    }
-}
+require "./header.php";
 ?>
 
+<h1>Bienvenue sur notre site</h1>
+
+<!-- video-->
+<div style="text-align:center; margin-top: 20px;">
+    <iframe width="560" height="315" 
+        src="https://www.youtube.com/embed/gYO1uk7vIcc?si=EUexAaNKUweC9f-1" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+<!-- Liste Villes -->
+<div class="main-content">
+    <div class="container__login">
+        <h2>Liste des villes enregistrées</h2>
+        <table border="1">
+            <tr>
+                <th>Nom</th>
+                <th>Pays</th>
+                <th>Capitale</th>
+                <th>Nationalité</th>
+            </tr>
+            <?php foreach ($villes as $ville) { ?>
+                <tr>
+                    <td><?= htmlspecialchars($ville['nom']) ?></td>
+                    <td><?= htmlspecialchars($ville['pays']) ?></td>
+                    <td><?= ($ville['capitale'] == 1) ? "Oui" : "Non"; ?></td>
+                    <td><?= htmlspecialchars($ville['nationalite']) ?></td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
+</div>
+
+<!-- formulaire -->
 <div class="main-content">
     <div class="container__login">
         <h1>Inscription</h1>
@@ -68,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <select name="ville_id" required>
                 <option value="">-- Sélectionnez votre ville --</option>
                 <?php foreach ($villes as $ville) { ?>
-                    <option value="<?= $ville['id'] ?>"><?= htmlspecialchars($ville['nom']) ?></option>
+                    <option value="<?= $ville['id_ville'] ?>"><?= htmlspecialchars($ville['nom']) ?></option>
                 <?php } ?>
             </select><br>
 
