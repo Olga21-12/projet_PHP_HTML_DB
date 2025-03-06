@@ -83,8 +83,8 @@ class Utilisateur{
                 "Nom : " . $this->nom."<br>".
                 "Prenom : " . $this->prenom."<br>". 
                 "Pseudo : " . $this->pseudo."<br>".
-                "Mot De Passe : " . $this->motDePasse."<br>";
-                "Date De Naissance : " . $this->dateNaissance."<br>";
+                "Mot De Passe : " . $this->motDePasse."<br>".
+                "Date De Naissance : " . $this->dateNaissance."<br>".
                 "Id Ville : " . $this->idVille."<br>";
 } 
 
