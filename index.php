@@ -1,45 +1,80 @@
 <?php
-require_once "config/database.php"; 
+session_start();
+require 'src/config/database.php';
 
-$query = $pdo->query("SELECT * FROM villes");
-$villes = $query->fetchAll();
+$title = "Inscription";
+$nav = "./register.php";
+
+require "./header.php";
+
+$message = "";
+$query = "SELECT * FROM villes";
+$stmt = $pdo->query($query);
+$villes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $nom = htmlspecialchars(trim($_POST['nom']));
+    $prenom = htmlspecialchars(trim($_POST['prenom']));
+    $pseudo = htmlspecialchars(trim($_POST['pseudo']));
+    $password = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
+    $age = (int) $_POST['age'];
+    $ville_id = (int) $_POST['ville_id'];
+
+
+    $checkPseudo = $pdo->prepare("SELECT id FROM utilisateurs WHERE pseudo = ?");
+    $checkPseudo->execute([$pseudo]);
+
+    if ($checkPseudo->rowCount() > 0) {
+        $message = "⚠️ Ce pseudo est déjà utilisé, veuillez en choisir un autre.";
+    } else {
+
+        $stmt = $pdo->prepare("INSERT INTO utilisateurs (nom, prenom, pseudo, mot_de_passe, age, ville_id) 
+                               VALUES (?, ?, ?, ?, ?, ?)");
+        if ($stmt->execute([$nom, $prenom, $pseudo, $password, $age, $ville_id])) {
+            $message = "✅ Inscription réussie ! Vous pouvez maintenant vous connecter.";
+        } else {
+            $message = "❌ Erreur lors de l'inscription. Veuillez réessayer.";
+        }
+    }
+}
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Accueil</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <?php include 'header.php'; ?>
+<div class="main-content">
+    <div class="container__login">
+        <h1>Inscription</h1>
 
-    <h1>Bienvenue sur notre site</h1>
-
-    <div style="text-align:center; margin-top: 20px;">
-        <iframe width="560" height="315" 
-            src="https://www.youtube.com/embed/gYO1uk7vIcc?si=EUexAaNKUweC9f-1" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <h2>Liste des pays enregistrés</h2>
-    <table border="1">
-        <tr><th>Nom</th><th>Pays</th><th>Capitale</th></tr>
-        <?php foreach ($villes as $ville) { ?>
-            <tr>
-                <td><?= htmlspecialchars($ville['nom']) ?></td>
-                <td><?= htmlspecialchars($ville['pays']) ?></td>
-                <td><?= htmlspecialchars($ville['capitale']) ?></td>
-            </tr>
+        <?php if (!empty($message)) { ?>
+            <p style="color: red; font-weight: bold;"><?= $message; ?></p>
         <?php } ?>
-    </table>
 
-    <?php include 'footer.php'; ?>
-</body>
-</html>
+        <form method="POST">
+            <label>Nom:</label>
+            <input type="text" name="nom" required><br>
+
+            <label>Prénom:</label>
+            <input type="text" name="prenom" required><br>
+
+            <label>Pseudo:</label>
+            <input type="text" name="pseudo" required><br>
+
+            <label>Mot de passe:</label>
+            <input type="password" name="mot_de_passe" required><br>
+
+            <label>Âge:</label>
+            <input type="number" name="age" min="1" required><br>
+
+            <label>Ville:</label>
+            <select name="ville_id" required>
+                <option value="">-- Sélectionnez votre ville --</option>
+                <?php foreach ($villes as $ville) { ?>
+                    <option value="<?= $ville['id'] ?>"><?= htmlspecialchars($ville['nom']) ?></option>
+                <?php } ?>
+            </select><br>
+
+            <button type="submit">S'inscrire</button>
+        </form>
+    </div>
+</div>
+
+<?php include 'footer.php'; ?>
