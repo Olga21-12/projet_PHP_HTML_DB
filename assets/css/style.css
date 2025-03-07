@@ -201,6 +201,16 @@ button:hover {
     text-align: left;
 }
 
+table{
+    width: 80%;
+    margin: 0 auto;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
 
 /* footer */
 
