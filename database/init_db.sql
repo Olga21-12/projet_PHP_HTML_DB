@@ -48,28 +48,28 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Structure de la table `villes`
 --
 
--- Insertion villes
-INSERT INTO villes (nom, pays, capitale, nationalite) VALUES
-('Paris', 'France', 1, 'Française'),
-('Londres', 'Royaume-Uni', 1, 'Britannique'),
-('Berlin', 'Allemagne', 1, 'Allemande'),
-('Madrid', 'Espagne', 1, 'Espagnole'),
-('Rome', 'Italie', 1, 'Italienne'),
-('Bruxelles', 'Belgique', 1, 'Belge'),
-('Lisbonne', 'Portugal', 1, 'Portugaise'),
-('Amsterdam', 'Pays-Bas', 1, 'Néerlandaise'),
-('Athènes', 'Grèce', 1, 'Grecque'),
-('Vienne', 'Autriche', 1, 'Autrichienne');
-
 DROP TABLE IF EXISTS `villes`;
 CREATE TABLE IF NOT EXISTS `villes` (
   `id_ville` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `pays` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `capitale` tinyint(1) NOT NULL,
+  `capitale` BOOLEAN NOT NULL DEFAULT TRUE,
   `nationalite` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_ville`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Insertion villes
+INSERT INTO villes (nom, pays, capitale, nationalite) VALUES
+('Paris', 'France', TRUE, 'Français'),
+('Londres', 'Royaume-Uni', TRUE, 'Britannique'),
+('Berlin', 'Allemagne', TRUE, 'Allemand'),
+('Madrid', 'Espagne', TRUE, 'Espagnol'),
+('Rome', 'Italie', TRUE, 'Italien'),
+('Bruxelles', 'Belgique', TRUE, 'Belge'),
+('Lisbonne', 'Portugal', TRUE, 'Portugais'),
+('Amsterdam', 'Pays-Bas', TRUE, 'Néerlandais'),
+('Athènes', 'Grèce', TRUE, 'Grec'),
+('Vienne', 'Autriche', TRUE, 'Autrichien');
 
 --
 -- Contraintes pour les tables déchargées
