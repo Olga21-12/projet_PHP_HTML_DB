@@ -36,7 +36,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
       </div>
 
       <ul class="menu-list">
-        <li><a href="./register.php">INSCRIPTION</a></li>
+        <li><a href="./register.php" class="<?= ($current_page == 'register.php') ? 'active' : '' ?>">INSCRIPTION</a></li>
         <?php if (isset($_SESSION['user'])): ?>
           <li><a href="./logout.php" class="<?= ($current_page == 'logout.php') ? 'active' : '' ?>">LOGOUT</a></li>
         <?php else: ?>
