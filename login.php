@@ -7,40 +7,28 @@ $nav = "./login.php";
 
 require "./header.php";
 
-$message = ""; // Переменная для отображения сообщений
+$message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Проверяем, заполнены ли все поля
+    
     if (empty($_POST['pseudo']) || empty($_POST['mot_de_passe'])) {
         $message = "Veuillez remplir tous les champs.";
     } else {
         $pseudo = trim($_POST['pseudo']);
         $mot_de_passe = $_POST['mot_de_passe'];
 
-        // Подготавливаем запрос к базе
-        $stmt = $conn->prepare("SELECT id_user, mot_de_passe FROM users WHERE pseudo = ?");
-        $stmt->bind_param("s", $pseudo);
-        $stmt->execute();
-        $stmt->store_result();
+        $stmt = $pdo->prepare("SELECT id_user, mot_de_passe FROM users WHERE pseudo = ?");
+        $stmt->execute([$pseudo]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($stmt->num_rows > 0) {
-            // Привязываем результат к переменным
-            $stmt->bind_result($id_user, $hash);
-            $stmt->fetch();
-
-            // Проверяем пароль
-            if (password_verify($mot_de_passe, $hash)) {
-                $_SESSION['user'] = $pseudo;
-                $_SESSION['user_id'] = $id_user; // Сохраняем ID пользователя
-                header("Location: profile.php");
-                exit;
-            }
+        if ($user && password_verify($mot_de_passe, $user['mot_de_passe'])) {
+            $_SESSION['user'] = $pseudo;
+            $_SESSION['user_id'] = $user['id_user'];
+            header("Location: profile.php");
+            exit;
         }
 
-        // Если логин или пароль неверные
         $message = "Pseudo ou mot de passe incorrect.";
-        $stmt->close();
-        $conn->close();
     }
 }
 ?>

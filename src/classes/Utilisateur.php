@@ -1,4 +1,7 @@
 <?php
+
+require_once __DIR__ . '/../config/database.php';
+require_once "Ville.php";
 class Utilisateur{
     private int $idUser;
     private string $nom;
@@ -7,8 +10,11 @@ class Utilisateur{
     private string $motDePasse;
     private string $dateNaissance;
     private int $idVille;
+    private ?Ville $ville;
+    private ?PDO $pdo;
 
-    public function __construct(int $unIdUser, string $unNom, string $unPrenom, string $unPseudo, string $unMotDePasse, string $uneDateNaissance, int $unIdVille){
+    public function __construct(?PDO $pdo, int $unIdUser, string $unNom, string $unPrenom, string $unPseudo, string $unMotDePasse, string $uneDateNaissance, int $unIdVille){
+        $this->pdo = $pdo;
         $this->idUser=$unIdUser;
         $this->nom=$unNom;
         $this->prenom=$unPrenom;
@@ -16,7 +22,13 @@ class Utilisateur{
         $this->motDePasse=$unMotDePasse;
         $this->dateNaissance=$uneDateNaissance;
         $this->idVille=$unIdVille;        
+    
+
+    if ($pdo) {
+        $this->ville = new Ville($pdo, $unIdVille);
+        }
     }
+
     //geters
 
     public function getIdUser(): int{
@@ -47,6 +59,14 @@ class Utilisateur{
         return $this->idVille;
     }
 
+    public function getVille(): ?Ville {
+        return $this->ville;
+    }
+
+    public function getNationalite(): string {
+        return $this->ville ? $this->ville->getNationalite() : "Non défini";
+    }
+
 // setters
 
     public function setIdUser(int $nouveauIdUser): void{
@@ -75,6 +95,9 @@ class Utilisateur{
 
     public function setIdVille(int $nouveauIdVille): void{
         $this-> idVille = $nouveauIdVille;
+        if ($this->pdo) {
+            $this->ville = new Ville($this->pdo, $nouveauIdVille);
+        }
     }
 
     //toString
@@ -87,6 +110,14 @@ class Utilisateur{
                 "Date De Naissance : " . $this->dateNaissance."<br>".
                 "Id Ville : " . $this->idVille."<br>";
 } 
+
+public function afficherProfil() {
+    echo "Nom: " . $this->nom . "<br>";
+    echo "Prénom: " . $this->prenom . "<br>";
+    echo "Pseudo: " . $this->pseudo . "<br>";
+    echo "Ville: " . ($this->ville ? $this->ville->getNom() : "Non défini") . "<br>";
+    echo "Nationalité: " . $this->getNationalite() . "<br>";
+}
 
 }
 

@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `pseudo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `mot_de_passe` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `date_naissance` date NOT NULL,
-  `photo` blob NOT NULL,
+  `photo` blob DEFAULT NULL,
   `description` text COLLATE utf8mb4_general_ci NOT NULL,
   `id_ville` int DEFAULT NULL,
   PRIMARY KEY (`id_user`),

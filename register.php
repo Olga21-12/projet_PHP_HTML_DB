@@ -37,9 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $photoData = file_get_contents($photoTmp); // Lecture du fichier image
         }
         // Insertion de l'utilisateur dans la base de données
-        $stmt = $pdo->prepare("INSERT INTO users (nom, prenom, pseudo, mot_de_passe, age, id_ville) 
-                               VALUES (?, ?, ?, ?, ?, ?)");
-        if ($stmt->execute([$nom, $prenom, $pseudo, $password, $age, $ville_id])) {
+        $stmt = $pdo->prepare("INSERT INTO users (nom, prenom, pseudo, mot_de_passe, date_naissance, photo, description, id_ville) 
+                               VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        if ($stmt->execute([$nom, $prenom, $pseudo, $password, $date_naissance, $photoData ?: null, '', $ville_id])) {
             $message = "✅ Inscription réussie ! Vous pouvez maintenant vous connecter.";
         } else {
             $message = "❌ Erreur lors de l'inscription.";
