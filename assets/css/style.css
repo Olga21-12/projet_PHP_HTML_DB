@@ -173,14 +173,14 @@ button:hover {
 }
 
 .profil__info img {
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
     object-fit: cover;
     border: 3px solid brown;
 }
 
 .profil__details {
-    text-align: left;
+    font-size: 1.5rem;
 }
 
 .profil__details ul {
@@ -327,3 +327,63 @@ li {
 }
 
 
+.container__profil {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+.profil-photo {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profil__info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+.profil__details ul {
+    list-style: none;
+    padding: 0;
+}
+.profil__details li {
+    margin: 5px 0;
+    font-size: 1.3rem;
+}
+.about__me {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f8f8;
+    border-radius: 10px;
+}
+.form__description {
+    margin-top: 10px;
+}
+.form__description textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.profil__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.btn-update {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+.btn-update:hover {
+    background-color: #0056b3;
+}
